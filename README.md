@@ -1,163 +1,191 @@
-Overview
-This project provides a set of APIs for managing school data, including adding new schools and retrieving schools sorted by proximity to a user's location. The system is built with Node.js, Express.js, and MySQL, deployed on Render with the database hosted on Railway.
+Here's a more organized version of your README file:
 
-Features
-Add new schools with name, address, and geographical coordinates
+```markdown
+# School Management API
 
-Retrieve all schools sorted by proximity to user's location
+This project provides a set of APIs for managing school data, including adding new schools and retrieving schools sorted by proximity to a user's location. The system is built with **Node.js** and **Express.js**.
 
-Input validation for all fields
+---
 
-Geographical distance calculations
+## Table of Contents
+- [Features](#features)
+- [Technology Stack](#technology-stack)
+- [API Endpoints](#api-endpoints)
+  - [Add School](#add-school)
+  - [List Schools by Proximity](#list-schools-by-proximity)
+- [Setup Instructions](#setup-instructions)
+- [Live API URLs](#live-api-urls)
+- [Validation Rules](#validation-rules)
+- [Error Handling](#error-handling)
+- [Deployment](#deployment)
+- [Postman Collection](#postman-collection)
 
-Technology Stack
-Backend: Node.js with Express.js
+---
 
-Database: MySQL
+## Features
+- Add new schools with name, address, and geographical coordinates.
+- Retrieve all schools sorted by proximity to the user's location.
+- Input validation for all fields.
+- Geographical distance calculations.
 
-Libraries:
+---
 
-mysql2: MySQL database driver
+## Technology Stack
+- **Backend**: Node.js with Express.js
+- **Database**: MySQL
+- **Libraries**:
+  - `mysql2`: MySQL database driver
+  - `geolib`: For geographical distance calculations
+  - `cors`: Cross-Origin Resource Sharing
+  - `dotenv`: Environment variables management
 
-geolib: For geographical distance calculations
+---
 
-cors: Cross-Origin Resource Sharing
+## API Endpoints
 
-dotenv: Environment variables management
-
-API Endpoints
-Add School
+### Add School
 This endpoint is used to add a new school to the system.
 
-Request Body
-
-name (string): The name of the school.
-
-address (string): The address of the school.
-
-latitude (number): The latitude coordinate of the school location.
-
-longitude (number): The longitude coordinate of the school location.
-
-Response
-
-message (string): A message indicating the status of the request.
-
-schoolId (number): The unique identifier assigned to the newly added school.
-
-Example
-
-json
+#### **Request Body**
+```json
 {
   "name": "Test School 11",
   "address": "Society, Old Area",
   "latitude": 22.704,
   "longitude": 74.1024
 }
-List Schools by Proximity
-Endpoint: GET /api/listSchools
+```
 
+#### **Response**
+```json
+{
+  "message": "School added successfully",
+  "schoolId": 101
+}
+```
+
+#### **Example**
+- **Method**: `POST`
+- **Endpoint**: `/api/addSchool`
+- **Body**:
+  ```json
+  {
+    "name": "Test School 11",
+    "address": "Society, Old Area",
+    "latitude": 22.704,
+    "longitude": 74.1024
+  }
+  ```
+
+---
+
+### List Schools by Proximity
 This endpoint retrieves a list of schools based on the provided latitude and longitude.
 
-Request Query Parameters
+#### **Request Query Parameters**
+- `lat` (number): The latitude coordinate.
+- `lng` (number): The longitude coordinate.
 
-lat (number): The latitude coordinate.
-
-lng (number): The longitude coordinate.
-
-Response
-
-The response is a JSON object with the following schema:
-
-json
+#### **Response**
+```json
 {
-  "total": number,
+  "total": 5,
   "nearestSchool": {
-    "id": number,
-    "name": string,
-    "address": string,
-    "latitude": number,
-    "longitude": number,
-    "distanceKm": number
+    "id": 1,
+    "name": "Example School",
+    "address": "Example Address",
+    "latitude": 22.703,
+    "longitude": 74.102,
+    "distanceKm": 1.2
   },
   "results": [
     {
-      "id": number,
-      "name": string,
-      "address": string,
-      "latitude": number,
-      "longitude": number,
-      "distanceKm": number
+      "id": 1,
+      "name": "Example School",
+      "address": "Example Address",
+      "latitude": 22.703,
+      "longitude": 74.102,
+      "distanceKm": 1.2
+    },
+    {
+      "id": 2,
+      "name": "Another School",
+      "address": "Another Address",
+      "latitude": 22.705,
+      "longitude": 74.101,
+      "distanceKm": 2.3
     }
   ]
 }
-total (number): The total number of schools found.
+```
 
-nearestSchool (object): Information about the nearest school.
+#### **Example**
+- **Method**: `GET`
+- **Endpoint**: `/api/listSchools`
+- **Query Parameters**: `?lat=22.704&lng=74.102`
 
-id (number): The ID of the nearest school.
+---
 
-name (string): The name of the nearest school.
+## Setup Instructions
+Follow these steps to set up the project locally:
 
-address (string): The address of the nearest school.
+1. Clone the repository:
+   ```bash
+   git clone [repository-url]
+   ```
 
-latitude (number): The latitude coordinate of the nearest school.
+2. Install dependencies:
+   ```bash
+   npm install express mysql2 geolib cors dotenv
+   ```
 
-longitude (number): The longitude coordinate of the nearest school.
+3. Create a `.env` file with your database credentials:
+   ```env
+   DB_HOST=your_database_host
+   DB_USER=your_database_user
+   DB_PASSWORD=your_database_password
+   DB_NAME=your_database_name
+   PORT=your_port_number
+   ```
 
-distanceKm (number): The distance in kilometers from the provided coordinates to the nearest school.
+4. Start the server:
+   ```bash
+   node server.js
+   ```
 
-results (array): An array of school objects with similar properties as nearestSchool.
+---
 
-Live API URLs
-Add School: https://assignmentschoolmanagement.onrender.com/api/addSchool
+## Live API URLs
+- **Add School**: [https://assignmentschoolmanagement.onrender.com/api/addSchool](https://assignmentschoolmanagement.onrender.com/api/addSchool)
+- **List Schools by Proximity**: [https://assignmentschoolmanagement.onrender.com/api/listSchools?lat=xxx&lng=xxx](https://assignmentschoolmanagement.onrender.com/api/listSchools?lat=xxx&lng=xxx)
 
-List Schools: https://assignmentschoolmanagement.onrender.com/api/listSchools?lat=xxx&lng=xxx
+---
 
-Setup Instructions
-Clone the repository:
+## Validation Rules
+- All fields (`name`, `address`, `latitude`, `longitude`) are **required**.
+- `name` and `address` must be non-empty strings.
+- `latitude` and `longitude` must be valid numbers.
 
-bash
-git clone [repository-url]
-Install dependencies:
+---
 
-bash
-npm install express mysql2 geolib cors dotenv
-Create a .env file with your database credentials:
+## Error Handling
+The API provides meaningful error messages for:
+- Missing required fields.
+- Invalid data types.
+- Database connection issues.
 
-text
-DB_HOST=your_database_host
-DB_USER=your_database_user
-DB_PASSWORD=your_database_password
-DB_NAME=your_database_name
-PORT=your_port_number
-Start the server:
+---
 
-bash
-node server.js
-Postman Collection
+## Deployment
+- **Backend**: Deployed on [Render](https://render.com)
+- **Database**: Hosted on [Railway (MySQL)](https://railway.app)
+
+---
+
+## Postman Collection
 A Postman collection is available for testing the APIs. It includes example requests for both endpoints with documented expected responses.
 
-School Management API Postman Collection
+---
 
-Deployment
-Backend: Deployed on Render
-https://assignmentschoolmanagement.onrender.com
-
-Database: Hosted on Railway (MySQL)
-
-Validation Rules
-All fields (name, address, latitude, longitude) are required
-
-Name and address must be non-empty strings
-
-Latitude and longitude must be valid numbers
-
-Error Handling
-The API provides meaningful error messages for:
-
-Missing required fields
-
-Invalid data types
-
-Database connection issues
+Feel free to contribute or raise issues if you encounter any problems!
+```
