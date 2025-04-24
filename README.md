@@ -156,8 +156,8 @@ Follow these steps to set up the project locally:
 ---
 
 ## Live API URLs
-- **Add School**: [https://assignmentschoolmanagement.onrender.com/api/addSchool](https://assignmentschoolmanagement.onrender.com/api/addSchool)
-- **List Schools by Proximity**: [https://assignmentschoolmanagement.onrender.com/api/listSchools?lat=xxx&lng=xxx](https://assignmentschoolmanagement.onrender.com/api/listSchools?lat=xxx&lng=xxx)
+- **Add School**: [https://assignmentschoolmanagement.onrender.com/api/addSchool]
+- **List Schools by Proximity**: [https://assignmentschoolmanagement.onrender.com/api/listSchools?lat=xxx&lng=xxx]
 
 ---
 
