@@ -1,4 +1,6 @@
 Overview
+
+
 This project provides a set of APIs for managing school data, including adding new schools and retrieving schools sorted by proximity to a user's location. The system is built with Node.js, Express.js, and MySQL, deployed on Render with the database hosted on Railway.
 
 Features
