@@ -8,5 +8,9 @@ const db = mysql.createPool({
   password: process.env.MYSQLPASSWORD,
   database: process.env.MYSQLDATABASE,
 });
+db.getConnection()
+  .then(() => console.log('✅ MySQL DB connected!'))
+  .catch((err) => console.error('❌ MySQL connection failed:', err));
+
 
 module.exports = db;
