@@ -2,7 +2,7 @@ const { body, query } = require('express-validator');
 
 exports.validateAddSchool = [
   body('name').notEmpty().withMessage('Name is required'),
-  body('address').notEmpty.withMessage('Address is required'),
+  body('address').notEmpty().withMessage('Address is required'),
   body('latitude').isFloat().withMessage('Latitude must be a float'),
   body('longitude').isFloat().withMessage('Longitude must be a float'),
 ];
