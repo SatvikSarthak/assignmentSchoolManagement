@@ -184,7 +184,7 @@ The API provides meaningful error messages for:
 
 ## Postman Collection
 A Postman collection is available for testing the APIs. It includes example requests for both endpoints with documented expected responses.
-
+https://www.postman.com/satviksarthak17/workspace/school-management-api-testing/collection/32535496-91055a2f-fa3f-4277-8d1c-1082e6a7c49a?action=share&creator=32535496
 ---
 
 Feel free to contribute or raise issues if you encounter any problems!
